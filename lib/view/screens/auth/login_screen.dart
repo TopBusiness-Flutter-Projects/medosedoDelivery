@@ -81,16 +81,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   Center(
                       child: Column(
                         children: [
-                          Row(mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(AppConstants.appName, style: rubikMedium.copyWith(
-                                  fontSize: Dimensions.fontSizeLarge)),
-                              Text(' APP', style: rubikMedium.copyWith(
-                                  fontSize: Dimensions.fontSizeLarge, color: Get.isDarkMode? Theme.of(context).hintColor.withOpacity(.5) :
-                              Theme.of(context).primaryColor)),
-                            ],
-                          ),
-                           SizedBox(height: Dimensions.paddingSizeDefault),
+                          // Row(mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: [
+                          //     Text(AppConstants.appName, style: rubikMedium.copyWith(
+                          //         fontSize: Dimensions.fontSizeLarge)),
+                          //     Text(' APP', style: rubikMedium.copyWith(
+                          //         fontSize: Dimensions.fontSizeLarge, color: Get.isDarkMode? Theme.of(context).hintColor.withOpacity(.5) :
+                          //     Theme.of(context).primaryColor)),
+                          //   ],
+                          // ),
+                          //  SizedBox(height: Dimensions.paddingSizeDefault),
                           Row(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text('${'welcome_to'.tr} ${AppConstants.companyName}', style: rubikMedium.copyWith(

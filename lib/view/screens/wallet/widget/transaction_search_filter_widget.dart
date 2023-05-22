@@ -28,7 +28,7 @@ class DeliverySearchFilterWidget extends StatelessWidget {
                 child: Container(
                   padding:  EdgeInsets.only(right: Dimensions.paddingSizeSmall),
                   decoration: BoxDecoration(
-                      color: fromHistory? Theme.of(context).colorScheme.secondary : Theme.of(context).primaryColor.withOpacity(.08),
+                      color: fromHistory? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.secondary,
                       borderRadius: BorderRadius.circular(50)),
                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

@@ -11,15 +11,18 @@ ThemeData light = ThemeData(
   dividerColor: const Color(0xFF2A2A2A),
   errorColor: const Color(0xFFFC6A57),
   primaryColorDark: const Color(0xFFFFFFFF),
-  colorScheme: const ColorScheme.light(primary: Color(0xFF0079E3), secondary: Color(0xFF004C8E),
+  colorScheme: const ColorScheme.light(
+    primary: Color(0xFFF89B1D),
+    secondary: Color(0xFF8F5201),
       tertiary: Color(0xFFE5B92C),
-    tertiaryContainer: Color(0xFFADC9F3),
+    tertiaryContainer: Color(0xFFF6EAD0),
       onTertiaryContainer: Color(0xFF33AF74),
       outline: Color(0xFF039D55),
-      surface: Color(0xFFEBD27D),
-      surfaceTint: Color(0xFF004C8E),
+      surface: Color(0xFFB7BEF2),
+      surfaceTint: Color(0xFFF89B1D),
 
-      primaryContainer: Color(0xFF9AECC6),secondaryContainer: Color(0xFFF2F2F2),),
+      primaryContainer: Color(0xFFF2C6D5),
+    secondaryContainer: Color(0xFFF2F2F2),),
 
   textTheme: const TextTheme(
     button: TextStyle(color: Colors.white),

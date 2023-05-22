@@ -14,13 +14,13 @@ ThemeData dark = ThemeData(
   canvasColor: const Color(0xFF041524),
   cardColor: const Color(0xFF263542),
 
-  colorScheme : const ColorScheme.dark(primary: Color(0xFF64BDF9),
-    secondary: Color(0xFF3B93DF),
+  colorScheme : const ColorScheme.dark(primary: Color(0xFFF89B1D),
+    secondary: Color(0xFF8F5201),
     tertiary: Color(0xFF865C0A),
-    tertiaryContainer: Color(0xFFB5CEF7),
+    tertiaryContainer: Color(0xFFF6EAD0),
     onTertiaryContainer: Color(0xFF35B3E7),
-    primaryContainer: Color(0xFF208458),
-    surface: Color(0xFF615C34),
+    primaryContainer: Color(0xFFF2C6D5),
+    surface: Color(0xFFB7BEF2),
     outline: Color(0xFF039D55),
     secondaryContainer: Color(0xFFF2F2F2),),
 

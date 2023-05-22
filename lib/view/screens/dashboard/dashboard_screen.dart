@@ -115,7 +115,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       icon: index == menuController.currentTab ?const SizedBox() :
       SizedBox(width: Dimensions.iconSizeMenu,
         child: Padding(
-          padding: const EdgeInsets.only(left: 5),
+          padding: const EdgeInsets.only(left: 3),
           child: Image.asset(icon, color : index == menuController.currentTab ?
           Theme.of(context).cardColor : ColorResources.colorGrey),
         )),
@@ -124,9 +124,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
           SizedBox(width: Dimensions.iconSizeMedium,
               child: Image.asset(icon, color : index == menuController.currentTab ?
               Theme.of(context).cardColor : ColorResources.colorGrey)),
-          const SizedBox(width: 4),
+          const SizedBox(width: 2),
           Text(label, style: rubikRegular.copyWith(color: index == menuController.currentTab ?
-          Colors.white : ColorResources.colorGrey)),
+          Colors.white : ColorResources.colorGrey,
+          fontSize: 13)),
         ],
       ),
     );

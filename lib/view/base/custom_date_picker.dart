@@ -23,6 +23,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       child: Container(
         margin:  EdgeInsets.only(left: Dimensions.paddingSizeSmall,right: Dimensions.paddingSizeSmall),
         child: Container(
+
+
           height: 50,
           padding:  EdgeInsets.fromLTRB(Dimensions.paddingSizeExtraSmall,Dimensions.paddingSizeExtraSmall,0,Dimensions.paddingSizeExtraSmall),
 

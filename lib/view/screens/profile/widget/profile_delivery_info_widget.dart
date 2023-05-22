@@ -17,7 +17,7 @@ class ProfileDeliveryInfoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:  EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeExtraSmall),
-      child: Container(height: 145, width: MediaQuery.of(context).size.width/3.8,
+      child: Container(height: 160, width: MediaQuery.of(context).size.width/3.8,
         padding:  EdgeInsets.all(Dimensions.paddingSizeDefault),decoration: BoxDecoration(
         color: Get.isDarkMode? Theme.of(context).hintColor.withOpacity(.125) : Theme.of(context).primaryColor.withOpacity(.05),
         borderRadius: BorderRadius.circular(Dimensions.paddingSizeSmall),

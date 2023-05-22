@@ -41,8 +41,8 @@ class OrderHistoryItemWidget extends StatelessWidget {
                         Row(children: [
                           Row(
                             children: [
-                              Text('${'assigned'.tr} : ',style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: Dimensions.fontSizeSmall),),
-                              Text(DateConverter.isoStringToLocalDateOnly(orderModel.createdAt), style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeSmall),),
+                              Text('${'assigned'.tr} : ',style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: 13),),
+                              Text(DateConverter.isoStringToLocalDateOnly(orderModel.createdAt), style: rubikRegular.copyWith(fontSize: 10),),
                             ],
                           ),
                            SizedBox(width: Dimensions.paddingSizeSmall),
@@ -70,7 +70,7 @@ class OrderHistoryItemWidget extends StatelessWidget {
               Column(crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding:  EdgeInsets.only(left: 7,top: Dimensions.paddingSizeSmall),
+                      padding:  EdgeInsets.only(left: 5,top: Dimensions.paddingSizeSmall),
                       child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                         Expanded(
                           child: Text('${'order'.tr} #${orderModel.id}',

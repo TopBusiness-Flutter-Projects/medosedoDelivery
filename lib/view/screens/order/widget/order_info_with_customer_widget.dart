@@ -64,7 +64,7 @@ class OrderInfoWithCustomerWidget extends StatelessWidget {
                    onYesPressed: (){
                      Get.back();
                      orderController.cancelOrderStatus(
-                         orderId: orderModel.id,
+                         orderId      : orderModel.id,
                          cause: orderController.reasonValue.tr,
                          context: context);
                   },),isFlip: true),)),

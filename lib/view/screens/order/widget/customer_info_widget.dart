@@ -67,7 +67,7 @@ class CustomerInfoWidget extends StatelessWidget {
 
                SizedBox(height: Dimensions.paddingSizeExtraSmall),
               orderModel.customer != null?
-              Text('${jsonDecode(orderModel.shippingAddressData)['address']}',
+              Text('${''}',
                   style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeSmall,
                       color: Theme.of(context).hintColor)):const SizedBox(),
                SizedBox(height: Dimensions.paddingSizeSmall),
