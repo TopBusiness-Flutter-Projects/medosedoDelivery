@@ -93,12 +93,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
               ]),
 
-              Positioned(bottom: 70,child: Align(
-                alignment: Alignment.bottomLeft,
-                child: SizedBox(width: 100, child: Image.asset(Images.leftBox)),)),
-              Positioned(child: Align(
-                alignment: Alignment.bottomRight,
-                child: SizedBox(width: 100, child: Image.asset(Images.rightBox)),)),
+              // Positioned(bottom: 70,child: Align(
+              //   alignment: Alignment.bottomLeft,
+              //   child: SizedBox(width: 100, child: Image.asset(Images.leftBox)),)),
+              // Positioned(child: Align(
+              //   alignment: Alignment.bottomRight,
+              //   child: SizedBox(width: 100, child: Image.asset(Images.rightBox)),)),
             ],
           ))) : const SizedBox();
         }

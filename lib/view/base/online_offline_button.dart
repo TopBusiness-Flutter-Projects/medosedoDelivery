@@ -20,7 +20,7 @@ class OnlineOfflineButton extends StatelessWidget {
         return (profileController.profileModel != null && orderController.currentOrders != null) ?
         FlutterCustomSwitch(
           width: showProfileImage ?  90: 40, height: showProfileImage ? 30 : 20,
-          valueFontSize: Dimensions.fontSizeDefault, showOnOff: true,
+          valueFontSize: 13, showOnOff: true,
           activeText: showProfileImage ? 'online'.tr : '' ,
           inactiveText: showProfileImage ? 'offline'.tr : '',
           activeColor:  showProfileImage ? Theme.of(context).colorScheme.outline.withOpacity(.25) : Theme.of(context).primaryColor,

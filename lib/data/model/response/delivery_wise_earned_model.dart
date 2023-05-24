@@ -153,11 +153,11 @@ class Orders {
     sellerIs = json['seller_is'];
     shippingAddressData = json['shipping_address_data'];
     medosedoDeliveryId = json['delivery_man_id'];
-    if(json['medosedoDelivery_charge'] != null){
+    if(json['deliveryman_charge'] != null){
       try{
-        medosedoDeliveryCharge = json['medosedoDelivery_charge'].toDouble();
+        medosedoDeliveryCharge = json['deliveryman_charge'].toDouble();
       }catch(e){
-        medosedoDeliveryCharge = double.parse(json['medosedoDelivery_charge'].toString());
+        medosedoDeliveryCharge = double.parse(json['deliveryman_charge'].toString());
       }
 
     }
@@ -199,7 +199,7 @@ class Orders {
     data['seller_is'] = sellerIs;
     data['shipping_address_data'] = shippingAddressData;
     data['delivery_man_id'] = medosedoDeliveryId;
-    data['medosedoDelivery_charge'] = medosedoDeliveryCharge;
+    data['deliveryman_charge'] = medosedoDeliveryCharge;
     data['expected_delivery_date'] = expectedDeliveryDate;
     data['order_note'] = orderNote;
     data['billing_address'] = billingAddress;

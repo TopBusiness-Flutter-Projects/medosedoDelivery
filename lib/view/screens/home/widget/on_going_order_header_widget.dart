@@ -32,7 +32,7 @@ class OngoingOrderHeader extends StatelessWidget {
                     Row(children: [
                       Row(
                         children: [
-                          Text('${'assigned'.tr} : ',style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: Dimensions.fontSizeSmall),),
+                          Text('${'assigned'.tr} : ',style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: 10),),
                           Text(DateConverter.isoStringToLocalDateOnly(orderModel.createdAt), style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeSmall)),
                         ],
                       ),
@@ -47,7 +47,7 @@ class OngoingOrderHeader extends StatelessWidget {
                       child: Row(
                         children: [
                           Text('${'expected_date'.tr} : ',
-                            style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: Dimensions.fontSizeSmall),),
+                            style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: 10),),
                           Text(orderModel.expectedDate??'', style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeSmall)),
                         ],
                       ),
