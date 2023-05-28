@@ -52,16 +52,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             child: Image.asset(onBoardingController.onBoardingList[index].imageUrl, fit: BoxFit.contain,)),
                       ),
 
-                      Text(onBoardingController.onBoardingList[index].title,
-                        style: rubikRegular.copyWith(fontSize: Dimensions.paddingSizeDefault, color: Theme.of(context).primaryColor),
-                        textAlign: TextAlign.center,
-                      ),
-
-
-                      Text(onBoardingController.onBoardingList[index].description,
-                        style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeDefault),
-                        textAlign: TextAlign.center,
-                      ),
+                      // Text(onBoardingController.onBoardingList[index].title,
+                      //   style: rubikRegular.copyWith(fontSize: Dimensions.paddingSizeDefault, color: Theme.of(context).primaryColor),
+                      //   textAlign: TextAlign.center,
+                      // ),
+                      //
+                      //
+                      // Text(onBoardingController.onBoardingList[index].description,
+                      //   style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeDefault),
+                      //   textAlign: TextAlign.center,
+                      // ),
 
                     ]);
                   },
