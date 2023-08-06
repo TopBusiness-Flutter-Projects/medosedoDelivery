@@ -149,11 +149,13 @@ class GeneralInfo extends StatelessWidget {
                   Padding(
                     padding:  EdgeInsets.symmetric(vertical: Dimensions.paddingSizeDefault),
                     child: Row(children: [
-                      Expanded(child: Container(
+                      Expanded(
+                          child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(Dimensions.paddingSizeDefault)),
                         child: ClipRRect(borderRadius: BorderRadius.circular(Dimensions.paddingSizeDefault),
                           child: CustomImage(image: '${Get.find<SplashController>().baseUrls!.medosedoDeliveryImageUrl}/${profileController.profileModel!.identityImage![0]}' , height: 120)),)),
+                          child: CustomImage(image: profileController.profileModel.identityImage.length>0?'${Get.find<SplashController>().baseUrls.medosedoDeliveryImageUrl}/${profileController.profileModel.identityImage[0]}':"" , height: 120)),)),
                       SizedBox(width: Dimensions.paddingSizeExtraSmall),
 
                       profileController.profileModel!.identityImage!.length>1?
