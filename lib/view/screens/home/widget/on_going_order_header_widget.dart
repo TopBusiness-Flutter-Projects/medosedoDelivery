@@ -34,8 +34,8 @@ class OngoingOrderHeader extends StatelessWidget {
                         children: [
                           Text('${'assigned'.tr} : ',style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: Dimensions.fontSizeSmall),),
                           Text(DateConverter.isoStringToLocalDateOnly(orderModel!.createdAt!), style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeSmall)),
-                          Text('${'assigned'.tr} : ',style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: 10),),
-                          Text(DateConverter.isoStringToLocalDateOnly(orderModel.createdAt), style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeSmall)),
+                        //  Text('${'assigned'.tr} : ',style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: 10),),
+                          //Text(DateConverter.isoStringToLocalDateOnly(orderModel.createdAt), style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeSmall)),
                         ],
                       ),
                        SizedBox(width: Dimensions.paddingSizeSmall),
@@ -49,10 +49,10 @@ class OngoingOrderHeader extends StatelessWidget {
                       child: Row(
                         children: [
                           Text('${'expected_date'.tr} : ',
-                            style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: Dimensions.fontSizeSmall),),
-                          Text(orderModel!.expectedDate??'', style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeSmall)),
                             style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: 10),),
-                          Text(orderModel.expectedDate??'', style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeSmall)),
+                          Text(orderModel!.expectedDate??'', style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeSmall)),
+                         //   style: rubikRegular.copyWith(color: Theme.of(context).hintColor, fontSize: 10),),
+                       //   Text(orderModel.expectedDate??'', style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeSmall)),
                         ],
                       ),
                     ):const SizedBox(),
