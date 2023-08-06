@@ -12,7 +12,7 @@ import 'package:medosedoDelivery/view/base/custom_snackbar.dart';
 
 class DeliverySearchFilterWidget extends StatelessWidget {
   final bool fromHistory;
-  const DeliverySearchFilterWidget({Key key, this.fromHistory = false}) : super(key: key);
+  const DeliverySearchFilterWidget({Key? key, this.fromHistory = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

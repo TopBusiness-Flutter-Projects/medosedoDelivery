@@ -7,7 +7,7 @@ import 'package:medosedoDelivery/data/repository/onboarding_repo.dart';
 
 class OnBoardingController extends GetxController implements GetxService {
   final OnBoardingRepo onboardingRepo;
-  OnBoardingController({@required this.onboardingRepo});
+  OnBoardingController({required this.onboardingRepo});
 
   List<OnBoardingModel> _onBoardingList = [];
   int _selectedIndex = 0;

@@ -7,7 +7,7 @@ import 'package:medosedoDelivery/utill/styles.dart';
 class OrderTypeButton extends StatelessWidget {
   final String text;
   final int index;
-  const OrderTypeButton({Key key, @required this.text, @required this.index}) : super(key: key);
+  const OrderTypeButton({Key? key, required this.text, required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

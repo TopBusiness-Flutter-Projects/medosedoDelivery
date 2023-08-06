@@ -6,9 +6,9 @@ import 'package:medosedoDelivery/utill/images.dart';
 import 'package:medosedoDelivery/view/base/custom_stepper.dart';
 
 class TrackingStepperWidget extends StatelessWidget {
-  final String status;
+  final String? status;
 
-  const TrackingStepperWidget({Key key, @required this.status}) : super(key: key);
+  const TrackingStepperWidget({Key? key, required this.status}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

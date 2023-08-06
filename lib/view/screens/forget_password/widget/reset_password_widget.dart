@@ -11,20 +11,20 @@ import 'package:medosedoDelivery/view/base/custom_text_field.dart';
 import 'package:medosedoDelivery/view/screens/auth/login_screen.dart';
 
 class ResetPasswordWidget extends StatefulWidget {
-  final String mobileNumber;
+  final String? mobileNumber;
 
-  const ResetPasswordWidget({Key key,@required this.mobileNumber}) : super(key: key);
+  const ResetPasswordWidget({Key? key,required this.mobileNumber}) : super(key: key);
 
   @override
   _ResetPasswordWidgetState createState() => _ResetPasswordWidgetState();
 }
 
 class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
-  TextEditingController _passwordController;
-  TextEditingController _confirmPasswordController;
+  TextEditingController? _passwordController;
+  TextEditingController? _confirmPasswordController;
   final FocusNode _newPasswordNode = FocusNode();
   final FocusNode _confirmPasswordNode = FocusNode();
-  GlobalKey<FormState> _formKeyReset;
+  GlobalKey<FormState>? _formKeyReset;
 
   @override
   void initState() {
@@ -35,8 +35,8 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
 
 
   void resetPassword() async {
-      String _password = _passwordController.text.trim();
-      String _confirmPassword = _confirmPasswordController.text.trim();
+      String _password = _passwordController!.text.trim();
+      String _confirmPassword = _confirmPasswordController!.text.trim();
 
       if (_password.isEmpty) {
      showCustomSnackBar('password_is_required'.tr);
