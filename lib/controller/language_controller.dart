@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,8 +5,8 @@ import 'package:medosedoDelivery/data/model/response/language_model.dart';
 import 'package:medosedoDelivery/utill/app_constants.dart';
 
 class LanguageController extends GetxController implements GetxService {
-  final SharedPreferences? sharedPreferences;
-  LanguageController({this.sharedPreferences});
+  final SharedPreferences sharedPreferences;
+  LanguageController({required this.sharedPreferences});
 
   int? _selectIndex = 0;
   int? get selectIndex => _selectIndex;

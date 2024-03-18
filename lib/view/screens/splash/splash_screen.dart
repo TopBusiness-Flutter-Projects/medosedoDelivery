@@ -10,7 +10,6 @@ import 'package:medosedoDelivery/controller/splash_controller.dart';
 import 'package:medosedoDelivery/utill/app_constants.dart';
 import 'package:medosedoDelivery/utill/dimensions.dart';
 import 'package:medosedoDelivery/utill/images.dart';
-import 'package:medosedoDelivery/utill/styles.dart';
 import 'package:medosedoDelivery/view/screens/auth/login_screen.dart';
 import 'package:medosedoDelivery/view/screens/dashboard/dashboard_screen.dart';
 import 'package:medosedoDelivery/view/screens/onboard/onboarding_screen.dart';
@@ -32,18 +31,24 @@ class _SplashScreenState extends State<SplashScreen> {
 
     FirebaseMessaging.instance.subscribeToTopic(AppConstants.topic);
     bool _firstTime = true;
-    _onConnectivityChanged = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      if(!_firstTime) {
-        bool isNotConnected = result != ConnectivityResult.wifi && result != ConnectivityResult.mobile;
-        isNotConnected ? const SizedBox() : ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    _onConnectivityChanged = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      if (!_firstTime) {
+        bool isNotConnected = result != ConnectivityResult.wifi &&
+            result != ConnectivityResult.mobile;
+        isNotConnected
+            ? const SizedBox()
+            : ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: isNotConnected ? Colors.red : Colors.green,
           duration: Duration(seconds: isNotConnected ? 6000 : 3),
-          content: Text(isNotConnected ? 'no_connection' : 'connected',
+          content: Text(
+            isNotConnected ? 'no_connection' : 'connected',
             textAlign: TextAlign.center,
           ),
         ));
-        if(!isNotConnected) {
+        if (!isNotConnected) {
           _route();
         }
       }
@@ -52,19 +57,21 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Get.find<SplashController>().initSharedData();
     _route();
-
   }
 
   @override
   void dispose() {
     super.dispose();
-
     _onConnectivityChanged.cancel();
   }
 
   void _route() {
+    print('..........................+++++++++++');
+
     Get.find<SplashController>().getConfigData().then((isSuccess) {
-      if(isSuccess) {
+      print('..........................');
+      if (isSuccess) {
+        print('.............');
         Timer(const Duration(seconds: 1), () async {
           if (Get.find<AuthController>().isLoggedIn()) {
             Get.find<AuthController>().updateToken();
@@ -87,13 +94,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _globalKey,
-
       body: Center(
         child: Padding(
-          padding:  EdgeInsets.all(Dimensions.paddingSizeLarge),
+          padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Image.asset(Images.splashLogo, width: Dimensions.splashLogoWidth),
-             SizedBox(height: Dimensions.paddingSizeDefault),
+            SizedBox(height: Dimensions.paddingSizeDefault),
             // Row(mainAxisAlignment: MainAxisAlignment.center,
             //   children: [
             //     Text(AppConstants.appName,
@@ -103,7 +109,6 @@ class _SplashScreenState extends State<SplashScreen> {
             //         style: rubikMedium.copyWith(fontSize: Dimensions.fontSizeOverLarge, color: Theme.of(context).primaryColor), textAlign: TextAlign.center),
             //   ],
             // ),
-
           ]),
         ),
       ),

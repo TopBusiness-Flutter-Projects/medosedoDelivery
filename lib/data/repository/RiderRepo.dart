@@ -17,5 +17,4 @@ class RiderRepo {
       'destination_lng': to.latitude
     });
   }
-
 }

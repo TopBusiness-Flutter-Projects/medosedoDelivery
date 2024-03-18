@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -15,8 +14,6 @@ class ProfileController extends GetxController implements GetxService {
   final ProfileRepo profileRepo;
   ProfileController({required this.profileRepo});
 
-
-
   UserInfoModel? _profileModel;
   UserInfoModel? get profileModel => _profileModel;
   String? _profileImage;
@@ -31,12 +28,12 @@ class ProfileController extends GetxController implements GetxService {
   bool _isVerify = false;
   bool get isVerify => _isVerify;
 
-  final List<String> _reviewTypeList = [ 'regular', 'saved'];
+  final List<String> _reviewTypeList = ['regular', 'saved'];
   List<String> get reviewTypeList => _reviewTypeList;
-   String _selectedReviewType = 'regular';
-  String get selectedReviewType=>_selectedReviewType;
+  String _selectedReviewType = 'regular';
+  String get selectedReviewType => _selectedReviewType;
 
-  List<ContactList>? _emergencyContactList =[];
+  List<ContactList>? _emergencyContactList = [];
   List<ContactList>? get emergencyContactList => _emergencyContactList;
 
   bool _isEnableVerificationCode = false;
@@ -44,10 +41,10 @@ class ProfileController extends GetxController implements GetxService {
   String _verificationCode = '';
   String get verificationCode => _verificationCode;
   bool _isPhoneNumberVerificationButtonLoading = false;
-  bool get isPhoneNumberVerificationButtonLoading => _isPhoneNumberVerificationButtonLoading;
+  bool get isPhoneNumberVerificationButtonLoading =>
+      _isPhoneNumberVerificationButtonLoading;
   bool _isUpdate = false;
   bool get isUpdate => _isUpdate;
-
 
   final FocusNode fNameFocus = FocusNode();
   final FocusNode lNameFocus = FocusNode();
@@ -60,19 +57,17 @@ class ProfileController extends GetxController implements GetxService {
   final TextEditingController addressController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   ReviewModel? _reviewModel;
   ReviewModel? get reviewModel => _reviewModel;
   List<Review>? _reviewList = [];
   List<Review>? get reviewList => _reviewList;
 
-
   set setSelectedReviewType(String type) {
     _selectedReviewType = type;
   }
-
-
 
   // void choose() async {
   //   final pickedFile = await picker.pickImage(source: ImageSource.gallery, imageQuality: 50, maxHeight: 500, maxWidth: 500);
@@ -87,38 +82,35 @@ class ProfileController extends GetxController implements GetxService {
     if (response.statusCode == 200) {
       _profileModel = UserInfoModel.fromJson(response.body);
       _profileImage = _profileModel!.image;
-
     } else {
       ApiChecker.checkApi(response);
     }
     update();
   }
-
 
   Future<void> getReviewList(int offset, {bool reload = true}) async {
-    if(reload){
+    if (reload) {
       _reviewList = [];
     }
-    Response response = await profileRepo.getReviewList(offset, selectedReviewType == 'regular'? 0 : 1);
+    Response response = await profileRepo.getReviewList(
+        offset, selectedReviewType == 'regular' ? 0 : 1);
     if (response.statusCode == 200) {
-      if(offset == 1){
+      if (offset == 1) {
         _reviewModel = ReviewModel.fromJson(response.body);
         _reviewList = ReviewModel.fromJson(response.body).review;
-      }else{
+      } else {
         _reviewModel!.totalSize = ReviewModel.fromJson(response.body).totalSize;
         _reviewModel!.offset = ReviewModel.fromJson(response.body).offset;
-        _reviewModel!.review!.addAll(ReviewModel.fromJson(response.body).review!);
+        _reviewModel!.review!
+            .addAll(ReviewModel.fromJson(response.body).review!);
       }
-
     } else {
       ApiChecker.checkApi(response);
     }
     update();
   }
 
-
-
-  Future <void> profileStatusChange(BuildContext context, int status) async {
+  Future<void> profileStatusChange(BuildContext context, int status) async {
     Response _response = await profileRepo.profileStatusOnnOff(status);
     if (_response.statusCode == 200) {
       Get.back();
@@ -133,19 +125,20 @@ class ProfileController extends GetxController implements GetxService {
     Response response = await profileRepo.getEmergencyContactList();
     if (response.statusCode == 200) {
       _emergencyContactList = [];
-      _emergencyContactList = EmergencyContactModel.fromJson(response.body).contactList;
+      _emergencyContactList =
+          EmergencyContactModel.fromJson(response.body).contactList;
     } else {
       ApiChecker.checkApi(response);
     }
     update();
   }
 
-  Future <Response> forgetPassword(String? countryCode ,String? phone) async {
+  Future<Response> forgetPassword(String? countryCode, String? phone) async {
     _isForget = true;
     update();
     Response _response = await profileRepo.forgetPassword(countryCode, phone);
     if (_response.statusCode == 200) {
-     showCustomSnackBar('otp_send_successfully'.tr, isError: false);
+      showCustomSnackBar('otp_send_successfully'.tr, isError: false);
     } else {
       ApiChecker.checkApi(_response);
     }
@@ -154,13 +147,12 @@ class ProfileController extends GetxController implements GetxService {
     return _response;
   }
 
-  Future <Response> verifyOtp (String otp ,String? phone) async {
+  Future<Response> verifyOtp(String otp, String? phone) async {
     _isVerify = true;
     update();
     _isPhoneNumberVerificationButtonLoading = true;
     Response _response = await profileRepo.verifyOtp(otp, phone);
     if (_response.statusCode == 200) {
-
       showCustomSnackBar('otp_verified_successfully'.tr, isError: false);
     } else {
       ApiChecker.checkApi(_response);
@@ -171,13 +163,14 @@ class ProfileController extends GetxController implements GetxService {
     return _response;
   }
 
-  Future <Response> resetPassword (String? phone, String password ,String confirmPassword) async {
+  Future<Response> resetPassword(
+      String? phone, String password, String confirmPassword) async {
     _isLoading = true;
     update();
-    Response _response = await profileRepo.resetPassword(phone, password, confirmPassword);
+    Response _response =
+        await profileRepo.resetPassword(phone, password, confirmPassword);
     if (_response.statusCode == 200) {
       showCustomSnackBar('password_reset_successfully'.tr, isError: false);
-
     } else {
       ApiChecker.checkApi(_response);
     }
@@ -185,7 +178,6 @@ class ProfileController extends GetxController implements GetxService {
     update();
     return _response;
   }
-
 
   updateVerificationCode(String query) {
     if (query.length == 4) {
@@ -197,10 +189,15 @@ class ProfileController extends GetxController implements GetxService {
     update();
   }
 
-  Future<Response> updateBankInfo(String bankName, String branch, String accountNumber, String holderName) async {
+  Future<Response> updateBankInfo(String bankName, String branch,
+      String accountNumber, String holderName) async {
     _isUpdate = true;
     update();
-    Response response = await profileRepo.updateBankInfo(bankName: bankName, branch: branch, accountNumber: accountNumber, holderName: holderName);
+    Response response = await profileRepo.updateBankInfo(
+        bankName: bankName,
+        branch: branch,
+        accountNumber: accountNumber,
+        holderName: holderName);
     if (response.statusCode == 200) {
       Get.find<ProfileController>().getProfile();
       Get.back();
@@ -215,11 +212,11 @@ class ProfileController extends GetxController implements GetxService {
     return response;
   }
 
-
-  Future<Response> savedReview( int? reviewId, int isSaved, int? index) async {
+  Future<Response> savedReview(int? reviewId, int isSaved, int? index) async {
     Response response = await profileRepo.saveReview(reviewId, isSaved);
     if (response.statusCode == 200) {
-      _reviewModel!.review![index!].isSaved = _reviewModel!.review![index].isSaved == 1 ? 0 : 1;
+      _reviewModel!.review![index!].isSaved =
+          _reviewModel!.review![index].isSaved == 1 ? 0 : 1;
       String? message;
       message = response.body['message'];
       showCustomSnackBar(message, isError: false);

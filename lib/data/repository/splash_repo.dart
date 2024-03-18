@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medosedoDelivery/data/api/api_client.dart';
@@ -11,27 +10,29 @@ class SplashRepo {
 
   Future<Response> getConfigData() async {
     Response _response = await apiClient.getData(AppConstants.configUri);
+    print("======== : ${AppConstants.configUri}");
+    print("======== :Response ${_response.statusText}");
     return _response;
   }
 
   Future<bool> initSharedData() {
-    if(!sharedPreferences.containsKey(AppConstants.theme)) {
+    if (!sharedPreferences.containsKey(AppConstants.theme)) {
       return sharedPreferences.setBool(AppConstants.theme, false);
     }
-    if(!sharedPreferences.containsKey(AppConstants.countryCode)) {
-      return sharedPreferences.setString(AppConstants.countryCode, AppConstants.languages[0].countryCode!);
+    if (!sharedPreferences.containsKey(AppConstants.countryCode)) {
+      return sharedPreferences.setString(
+          AppConstants.countryCode, AppConstants.languages[0].countryCode!);
     }
-    if(!sharedPreferences.containsKey(AppConstants.languageCode)) {
-      return sharedPreferences.setString(AppConstants.languageCode, AppConstants.languages[0].languageCode!);
+    if (!sharedPreferences.containsKey(AppConstants.languageCode)) {
+      return sharedPreferences.setString(
+          AppConstants.languageCode, AppConstants.languages[0].languageCode!);
     }
-    if(!sharedPreferences.containsKey(AppConstants.intro)) {
+    if (!sharedPreferences.containsKey(AppConstants.intro)) {
       sharedPreferences.setBool(AppConstants.intro, true);
     }
 
     return Future.value(true);
   }
-
-
 
   String getCurrency() {
     return sharedPreferences.getString(AppConstants.currency) ?? '';
@@ -44,37 +45,37 @@ class SplashRepo {
   Future<bool> removeSharedData() {
     return sharedPreferences.remove(AppConstants.token);
   }
+
   void disableIntro() {
     sharedPreferences.setBool(AppConstants.intro, false);
   }
 
   bool? showIntro() {
-    if(AppConstants.intro != null){
-      if(!sharedPreferences.containsKey(AppConstants.intro)) {
+    if (AppConstants.intro != null) {
+      if (!sharedPreferences.containsKey(AppConstants.intro)) {
         sharedPreferences.setBool(AppConstants.intro, true);
       }
-      return sharedPreferences.getBool(AppConstants.intro?? true as String);
+      return sharedPreferences.getBool(AppConstants.intro ?? true as String);
     }
     return false;
-
   }
 
   void disableNotification() {
     sharedPreferences.setBool(AppConstants.notificationSound, false);
   }
+
   void enableNotification() {
     sharedPreferences.setBool(AppConstants.notificationSound, true);
   }
 
   bool? notificationSound() {
-    if(AppConstants.notificationSound != null){
-      if(!sharedPreferences.containsKey(AppConstants.notificationSound)) {
+    if (AppConstants.notificationSound != null) {
+      if (!sharedPreferences.containsKey(AppConstants.notificationSound)) {
         sharedPreferences.setBool(AppConstants.notificationSound, true);
       }
-      return sharedPreferences.getBool(AppConstants.notificationSound?? true as String);
+      return sharedPreferences
+          .getBool(AppConstants.notificationSound ?? true as String);
     }
     return false;
-
   }
-
 }

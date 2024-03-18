@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medosedoDelivery/controller/auth_controller.dart';
@@ -22,115 +21,137 @@ import 'package:medosedoDelivery/view/screens/profile/widget/profile_header_widg
 import 'package:medosedoDelivery/view/screens/review/review_screen.dart';
 import 'package:medosedoDelivery/view/screens/setting/setting_screen.dart';
 
-
 class ProfileScreen extends StatelessWidget {
-   const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     UserInfoModel? profile = Get.find<ProfileController>().profileModel;
     return Scaffold(
-      appBar: CustomRiderAppBar(title: 'my_profile'.tr),
-
+        appBar: CustomRiderAppBar(title: 'my_profile'.tr),
         body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: GetBuilder<ProfileController>(builder: (profileController){
-
-            return Column(
-              children: [
-
-                ProfileHeaderWidget(profileModel: profileController.profileModel),
-
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeSmall),
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children:  [
-
-                    Expanded(child: ProfileDeliveryInfoItem(icon: Images.totalDelivery, title: 'total_delivery',
-                        countNumber: double.parse(profile!.totalDelivery.toString()))),
-
-                    Expanded(child: ProfileDeliveryInfoItem(icon: Images.completedDelivery, title: 'completed_delivery',
-                        countNumber: double.parse(profile.completedDelivery.toString()))),
-
-                    Expanded(child: ProfileDeliveryInfoItem(icon: Images.totalEarned, title: 'total_earned',
-                      countNumber: profile.totalEarn, isAmount: true,)),
-                  ],),
-                ),
-
-
-
-                Container(
-                  padding:  EdgeInsets.all(Dimensions.paddingSizeSmall),
-                  child: Column(children: [
-
+            physics: const BouncingScrollPhysics(),
+            child: GetBuilder<ProfileController>(
+              builder: (profileController) {
+                return Column(
+                  children: [
+                    ProfileHeaderWidget(
+                        profileModel: profileController.profileModel),
                     Padding(
-                      padding:  EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall,horizontal: Dimensions.paddingSizeDefault),
-                      child: Row(children: [
-                        SizedBox(width: 20, child: Image.asset(Images.statusIcon, color: Theme.of(context).colorScheme.primary,)),
-                         SizedBox(width: Dimensions.paddingSizeDefault),
-                        Expanded(child: Text('status'.tr,style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeDefault))),
-                        const OnlineOfflineButton(showProfileImage: false)
-
-                      ],),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.paddingSizeSmall),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                              child: ProfileDeliveryInfoItem(
+                                  icon: Images.totalDelivery,
+                                  title: 'total_delivery',
+                                  countNumber: double.parse(
+                                      profile!.totalDelivery.toString()))),
+                          Expanded(
+                              child: ProfileDeliveryInfoItem(
+                                  icon: Images.completedDelivery,
+                                  title: 'completed_delivery',
+                                  countNumber: double.parse(
+                                      profile.completedDelivery.toString()))),
+                          Expanded(
+                              child: ProfileDeliveryInfoItem(
+                            icon: Images.totalEarned,
+                            title: 'total_earned',
+                            countNumber: profile.totalEarn,
+                            isAmount: true,
+                          )),
+                        ],
+                      ),
                     ),
-
-
-                    ProfileButton(icon: Images.earnStatement, title: 'earning_statement'.tr,
-                        onTap: () => Get.to(const EarningStatementScreen())),
-
-
-
-
-                    ProfileButton(icon: Images.myReview, title: 'my_reviews'.tr,
-                        onTap: () => Get.to(const ReviewScreen())),
-
-
-
-
-                    ProfileButton(icon: Images.emergencyContact, title: 'emergency_contact'.tr,
-                        onTap: () => Get.to(const EmergencyContactScreen())),
-
-
-
-                    ProfileButton(icon: Images.helpSupport, title: 'help_and_support'.tr,
-                        onTap: () => Get.to(const HelpAndSupport())),
-
-
-
-
-
-                    ProfileButton(icon: Images.settingIcon, title: 'setting'.tr,
-                        onTap: () => Get.to(const SettingScreen())),
-
-
-                    ProfileButton(icon: Images.myReview, title: 'privacy_policy'.tr,
-                        onTap: () => Get.to(const HtmlViewerScreen(isPrivacyPolicy: true))),
-
-
-                    ProfileButton(icon: Images.myReview, title: 'terms_and_condition'.tr,
-                        onTap: () => Get.to(const HtmlViewerScreen(isPrivacyPolicy: false))),
-
-
-
-                    ProfileButton(icon: Images.logOut, title: 'log_out'.tr,
-                        onTap: () => showAnimatedDialog(context,  ConfirmationDialog(icon: Images.logOut,
-                          title: 'log_out'.tr,
-                          description: 'do_you_want_to_log_out_this_account'.tr, onYesPressed: (){
-                            Get.find<AuthController>().clearSharedData().then((condition) {
-                              Get.back();
-                              Get.offAll(const LoginScreen());
-                            });
-
-                          },),isFlip: true)),
-
-                    ],
-                  ),
-                )
-              ],
-            );
-
-          },)
-        ));
+                    Container(
+                      padding: EdgeInsets.all(Dimensions.paddingSizeSmall),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: Dimensions.paddingSizeSmall,
+                                horizontal: Dimensions.paddingSizeDefault),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                    width: 20,
+                                    child: Image.asset(
+                                      Images.statusIcon,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    )),
+                                SizedBox(width: Dimensions.paddingSizeDefault),
+                                Expanded(
+                                    child: Text('status'.tr,
+                                        style: rubikRegular.copyWith(
+                                            fontSize:
+                                                Dimensions.fontSizeDefault))),
+                                const OnlineOfflineButton(
+                                    showProfileImage: false)
+                              ],
+                            ),
+                          ),
+                          ProfileButton(
+                              icon: Images.earnStatement,
+                              title: 'earning_statement'.tr,
+                              onTap: () =>
+                                  Get.to(const EarningStatementScreen())),
+                          ProfileButton(
+                              icon: Images.myReview,
+                              title: 'my_reviews'.tr,
+                              onTap: () => Get.to(const ReviewScreen())),
+                          ProfileButton(
+                              icon: Images.emergencyContact,
+                              title: 'emergency_contact'.tr,
+                              onTap: () =>
+                                  Get.to(const EmergencyContactScreen())),
+                          ProfileButton(
+                              icon: Images.helpSupport,
+                              title: 'help_and_support'.tr,
+                              onTap: () => Get.to(const HelpAndSupport())),
+                          ProfileButton(
+                              icon: Images.settingIcon,
+                              title: 'setting'.tr,
+                              onTap: () => Get.to(const SettingScreen())),
+                          ProfileButton(
+                              icon: Images.myReview,
+                              title: 'privacy_policy'.tr,
+                              onTap: () => Get.to(const HtmlViewerScreen(
+                                  isPrivacyPolicy: true))),
+                          ProfileButton(
+                              icon: Images.myReview,
+                              title: 'terms_and_condition'.tr,
+                              onTap: () => Get.to(const HtmlViewerScreen(
+                                  isPrivacyPolicy: false))),
+                          ProfileButton(
+                              icon: Images.logOut,
+                              title: 'log_out'.tr,
+                              onTap: () => showAnimatedDialog(
+                                  context,
+                                  ConfirmationDialog(
+                                    icon: Images.logOut,
+                                    title: 'log_out'.tr,
+                                    description:
+                                        'do_you_want_to_log_out_this_account'
+                                            .tr,
+                                    onYesPressed: () {
+                                      Get.find<AuthController>()
+                                          .clearSharedData()
+                                          .then((condition) {
+                                        Get.back();
+                                        Get.offAll(const LoginScreen());
+                                      });
+                                    },
+                                  ),
+                                  isFlip: true)),
+                        ],
+                      ),
+                    )
+                  ],
+                );
+              },
+            )));
   }
-
 }

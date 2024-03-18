@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medosedoDelivery/data/api/api_checker.dart';
@@ -26,30 +25,27 @@ class SplashController extends GetxController implements GetxService {
   DateTime get currentTime => DateTime.now();
   bool get firstTimeConnectionCheck => _firstTimeConnectionCheck;
 
-
-
-
   Future<bool> getConfigData() async {
     Response response = await splashRepo.getConfigData();
     bool _isSuccess = false;
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       _configModel = ConfigModel.fromJson(response.body);
       _baseUrls = ConfigModel.fromJson(response.body).baseUrls;
       String? _currencyCode = splashRepo.getCurrency();
-      for(CurrencyList currencyList in _configModel!.currencyList!) {
-        if(currencyList.id == _configModel!.systemDefaultCurrency) {
-          if(_currencyCode == null || _currencyCode.isEmpty) {
+      for (CurrencyList currencyList in _configModel!.currencyList!) {
+        if (currencyList.id == _configModel!.systemDefaultCurrency) {
+          if (_currencyCode == null || _currencyCode.isEmpty) {
             _currencyCode = currencyList.code;
           }
           _defaultCurrency = currencyList;
         }
-        if(currencyList.code == 'USD') {
+        if (currencyList.code == 'USD') {
           _usdCurrency = currencyList;
         }
       }
       getCurrencyData(_currencyCode);
       _isSuccess = true;
-    }else {
+    } else {
       ApiChecker.checkApi(response);
       _isSuccess = false;
     }
@@ -57,22 +53,15 @@ class SplashController extends GetxController implements GetxService {
     return _isSuccess;
   }
 
-
-
-
-
   void getCurrencyData(String? currencyCode) {
     for (var currency in _configModel!.currencyList!) {
-      if(currencyCode == currency.code) {
+      if (currencyCode == currency.code) {
         _myCurrency = currency;
         _currencyIndex = _configModel!.currencyList!.indexOf(currency);
         return;
       }
     }
   }
-
-
-
 
   void setCurrency(int index) {
     splashRepo.setCurrency(_configModel!.currencyList![index].code!);
@@ -94,20 +83,21 @@ class SplashController extends GetxController implements GetxService {
 
   bool? showIntro() {
     return splashRepo.showIntro();
-
   }
+
   bool? notificationSound() {
     return splashRepo.notificationSound();
-
-
   }
+
   void disableIntro() {
     splashRepo.disableIntro();
   }
+
   void disableNotification() {
     splashRepo.disableNotification();
     update();
   }
+
   void enableNotification() {
     splashRepo.enableNotification();
     update();

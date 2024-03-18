@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 ThemeData dark = ThemeData(
   fontFamily: 'Rubik',
+  useMaterial3: false,
   brightness: Brightness.dark,
   hintColor: Colors.white,
   shadowColor: const Color(0xfff7f7f7),
@@ -13,8 +14,8 @@ ThemeData dark = ThemeData(
   errorColor: const Color(0xFFCF6679),
   canvasColor: const Color(0xFF041524),
   cardColor: const Color(0xFFF89B1D),
-
-  colorScheme : const ColorScheme.dark(primary: Color(0xFFF89B1D),
+  colorScheme: const ColorScheme.dark(
+    primary: Color(0xFFF89B1D),
     secondary: Color(0xFF8F5201),
     tertiary: Color(0xFF865C0A),
     tertiaryContainer: Color(0xFFF6EAD0),
@@ -22,10 +23,8 @@ ThemeData dark = ThemeData(
     primaryContainer: Color(0xFFF2C6D5),
     surface: Color(0xFFB7BEF2),
     outline: Color(0xFF039D55),
-    secondaryContainer: Color(0xFFF2F2F2),),
-
-
-
+    secondaryContainer: Color(0xFFF2F2F2),
+  ),
   textTheme: const TextTheme(
     button: TextStyle(color: Color(0xFFF9FAFA)),
     headline1: TextStyle(fontWeight: FontWeight.w300, color: Color(0xFFF9FAFA)),

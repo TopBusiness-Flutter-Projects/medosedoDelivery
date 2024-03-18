@@ -15,7 +15,6 @@ class OrderController extends GetxController implements GetxService {
   final OrderRepo orderRepo;
   OrderController({required this.orderRepo});
 
-
   List<OrderModel> _currentOrders = [];
   List<OrderModel> get currentOrders => _currentOrders;
   bool _isLoading = false;
@@ -36,7 +35,7 @@ class OrderController extends GetxController implements GetxService {
   String? selectedOrderLat = '23.83721';
   String? selectedOrderLng = '90.363715';
 
-  void setSelectedOrderLatLng(LatLng latLng){
+  void setSelectedOrderLatLng(LatLng latLng) {
     selectedOrderLat = latLng.latitude.toString();
     selectedOrderLat = latLng.longitude.toString();
     // update();
@@ -50,30 +49,31 @@ class OrderController extends GetxController implements GetxService {
     'other'
   ];
 
-
   String? _reasonValue = '';
   String? get reasonValue => _reasonValue;
 
   List<OrderModel>? _orderList;
-  List<OrderModel>? get orderList => _orderList != null ? _orderList!.reversed.toList() : _orderList;
+  List<OrderModel>? get orderList =>
+      _orderList != null ? _orderList!.reversed.toList() : _orderList;
 
-  void setReason(String? value, {bool reload = true}){
+  void setReason(String? value, {bool reload = true}) {
     _reasonValue = value;
-    if(reload){
+    if (reload) {
       update();
     }
-
   }
-
-
 
   Future<void> getCurrentOrders(BuildContext? context) async {
     _isLoading = true;
     update();
     Response response = await orderRepo.getCurrentOrders();
-    if (response.body != null && response.body != {} && response.statusCode == 200) {
+    if (response.body != null &&
+        response.body != {} &&
+        response.statusCode == 200) {
       _currentOrders = [];
-      response.body.forEach((order) {_currentOrders.add(OrderModel.fromJson(order));});
+      response.body.forEach((order) {
+        _currentOrders.add(OrderModel.fromJson(order));
+      });
 
       _isLoading = false;
     } else {
@@ -83,34 +83,34 @@ class OrderController extends GetxController implements GetxService {
     update();
   }
 
-
-
-
-  Future<List<OrderDetailsModel>?> getOrderDetails(String orderID, BuildContext context) async {
+  Future<List<OrderDetailsModel>?> getOrderDetails(
+      String orderID, BuildContext context) async {
     _orderDetails = null;
     _isLoading = true;
     Response response = await orderRepo.getOrderDetails(orderID: orderID);
     if (response.body != null && response.statusCode == 200) {
       _orderDetails = [];
-      response.body.forEach((orderDetail) => _orderDetails!.add(OrderDetailsModel.fromJson(orderDetail)));
+      response.body.forEach((orderDetail) =>
+          _orderDetails!.add(OrderDetailsModel.fromJson(orderDetail)));
       _isLoading = false;
     } else {
-      ApiChecker.checkApi( response);
+      ApiChecker.checkApi(response);
       _isLoading = false;
     }
     update();
     return _orderDetails;
   }
 
-
-
-
-  Future <void> getAllOrderHistory(String type, String startDate, String endDate, String search, int isPause) async {
+  Future<void> getAllOrderHistory(String type, String startDate, String endDate,
+      String search, int isPause) async {
     _isLoading = true;
-    Response response = await orderRepo.getAllOrderHistory(type,startDate,endDate, search, isPause);
+    Response response = await orderRepo.getAllOrderHistory(
+        type, startDate, endDate, search, isPause);
     if (response.body != null && response.statusCode == 200) {
       _allOrderHistory = [];
-      response.body.forEach((order) {_allOrderHistory.add(OrderModel.fromJson(order));});
+      response.body.forEach((order) {
+        _allOrderHistory.add(OrderModel.fromJson(order));
+      });
     } else {
       ApiChecker.checkApi(response);
     }
@@ -118,26 +118,26 @@ class OrderController extends GetxController implements GetxService {
     update();
   }
 
-  void selectedOrderLatLng(String? lat, String? lng){
+  void selectedOrderLatLng(String? lat, String? lng) {
     selectedOrderLat = lat;
     selectedOrderLng = lng;
     update();
   }
 
-
-
-  Future<bool> updateOrderStatus({int? orderId, String? status,BuildContext? context}) async {
+  Future<bool> updateOrderStatus(
+      {int? orderId, String? status, BuildContext? context}) async {
     _isLoading = true;
     update();
-    Response response = await orderRepo.updateOrderStatus(orderId: orderId, status: status);
+    Response response =
+        await orderRepo.updateOrderStatus(orderId: orderId, status: status);
     Get.back();
     bool _isSuccess;
-    if(response.body != null && response.statusCode == 200) {
+    if (response.body != null && response.statusCode == 200) {
       showCustomSnackBar(response.body['message'], isError: false);
       _isSuccess = true;
       Get.find<ProfileController>().getProfile();
       getCurrentOrders(context);
-    }else {
+    } else {
       ApiChecker.checkApi(response);
       _isSuccess = false;
     }
@@ -146,39 +146,19 @@ class OrderController extends GetxController implements GetxService {
     return _isSuccess;
   }
 
-
-
-  Future<bool> cancelOrderStatus({int? orderId, String? cause,BuildContext? context}) async {
+  Future<bool> cancelOrderStatus(
+      {int? orderId, String? cause, BuildContext? context}) async {
     _isLoading = true;
     update();
-    Response response = await orderRepo.cancelOrderStatus(orderId: orderId,  cause: cause);
+    Response response =
+        await orderRepo.cancelOrderStatus(orderId: orderId, cause: cause);
     Get.back();
     bool _isSuccess;
-    if(response.body != null && response.statusCode == 200) {
+    if (response.body != null && response.statusCode == 200) {
       showCustomSnackBar(response.body['message'], isError: false);
       _isSuccess = true;
       getCurrentOrders(context);
-    }else {
-      ApiChecker.checkApi(response);
-      _isSuccess = false;
-    }
-    _isLoading = false;
-
-    update();
-    return _isSuccess;
-  }
-
-  Future<bool> rescheduleOrderStatus({int? orderId, String? deliveryDate, String? cause, BuildContext? context}) async {
-    _isLoading = true;
-    update();
-    Response response = await orderRepo.rescheduleOrder(orderId: orderId, deliveryDate: deliveryDate, cause: cause);
-    Get.back();
-    bool _isSuccess;
-    if(response.body != null && response.statusCode == 200) {
-      showCustomSnackBar(response.body['message'], isError: false);
-      _isSuccess = true;
-      getCurrentOrders(context);
-    }else {
+    } else {
       ApiChecker.checkApi(response);
       _isSuccess = false;
     }
@@ -188,17 +168,44 @@ class OrderController extends GetxController implements GetxService {
     return _isSuccess;
   }
 
-  Future<bool> pauseAndResumeOrder({int? orderId, int? isPos, String? cause, BuildContext? context}) async {
+  Future<bool> rescheduleOrderStatus(
+      {int? orderId,
+      String? deliveryDate,
+      String? cause,
+      BuildContext? context}) async {
     _isLoading = true;
     update();
-    Response response = await orderRepo.pauseAndResumeOrder(orderId: orderId, isPos: isPos, cause: cause);
+    Response response = await orderRepo.rescheduleOrder(
+        orderId: orderId, deliveryDate: deliveryDate, cause: cause);
     Get.back();
     bool _isSuccess;
-    if(response.body != null && response.statusCode == 200) {
+    if (response.body != null && response.statusCode == 200) {
       showCustomSnackBar(response.body['message'], isError: false);
       _isSuccess = true;
       getCurrentOrders(context);
-    }else {
+    } else {
+      ApiChecker.checkApi(response);
+      _isSuccess = false;
+    }
+    _isLoading = false;
+
+    update();
+    return _isSuccess;
+  }
+
+  Future<bool> pauseAndResumeOrder(
+      {int? orderId, int? isPos, String? cause, BuildContext? context}) async {
+    _isLoading = true;
+    update();
+    Response response = await orderRepo.pauseAndResumeOrder(
+        orderId: orderId, isPos: isPos, cause: cause);
+    Get.back();
+    bool _isSuccess;
+    if (response.body != null && response.statusCode == 200) {
+      showCustomSnackBar(response.body['message'], isError: false);
+      _isSuccess = true;
+      getCurrentOrders(context);
+    } else {
       ApiChecker.checkApi(response);
       _isSuccess = false;
     }
@@ -209,55 +216,58 @@ class OrderController extends GetxController implements GetxService {
   }
 
   Future updatePaymentStatus({int? orderId, String? status}) async {
-    Response apiResponse = await orderRepo.updatePaymentStatus(orderId: orderId, status: status);
+    Response apiResponse =
+        await orderRepo.updatePaymentStatus(orderId: orderId, status: status);
 
     if (apiResponse.statusCode == 200) {
-
     } else {
-     ApiChecker.checkApi(apiResponse);
+      ApiChecker.checkApi(apiResponse);
     }
     update();
   }
 
-  Future orderRefresh(BuildContext context) async{
+  Future orderRefresh(BuildContext context) async {
     getCurrentOrders(context);
     return getCurrentOrders(context);
   }
 
-
   void setEarningFilterIndex(int index) {
     _orderTypeFilterIndex = index;
-    if(_orderTypeFilterIndex == 0){
+    if (_orderTypeFilterIndex == 0) {
       Get.find<WalletController>().getOrderWiseDeliveryCharge('', '', 1, '');
-    }else if(_orderTypeFilterIndex == 1){
-      Get.find<WalletController>().getOrderWiseDeliveryCharge('', '', 1, 'TodayEarn');
-    }
-    else if(_orderTypeFilterIndex == 2){
-      Get.find<WalletController>().getOrderWiseDeliveryCharge('', '', 1, 'ThisWeekEarn');
-    }
-    else if(_orderTypeFilterIndex == 3){
-      Get.find<WalletController>().getOrderWiseDeliveryCharge('', '', 1, 'ThisMonthEarn');
+    } else if (_orderTypeFilterIndex == 1) {
+      Get.find<WalletController>()
+          .getOrderWiseDeliveryCharge('', '', 1, 'TodayEarn');
+    } else if (_orderTypeFilterIndex == 2) {
+      Get.find<WalletController>()
+          .getOrderWiseDeliveryCharge('', '', 1, 'ThisWeekEarn');
+    } else if (_orderTypeFilterIndex == 3) {
+      Get.find<WalletController>()
+          .getOrderWiseDeliveryCharge('', '', 1, 'ThisMonthEarn');
     }
     update();
   }
 
-  void setOrderTypeIndex(int index, {String startDate = '', String endDate = '', String search = '', bool reload = false}) {
+  void setOrderTypeIndex(int index,
+      {String startDate = '',
+      String endDate = '',
+      String search = '',
+      bool reload = false}) {
     _orderTypeIndex = index;
-    if(orderTypeIndex == 0){
-      getAllOrderHistory('', startDate, endDate, search,0);
-    }else if(orderTypeIndex == 1){
-      getAllOrderHistory('out_for_delivery', startDate, endDate, search,0);
-    } else if(orderTypeIndex == 2){
+    if (orderTypeIndex == 0) {
+      getAllOrderHistory('', startDate, endDate, search, 0);
+    } else if (orderTypeIndex == 1) {
+      getAllOrderHistory('out_for_delivery', startDate, endDate, search, 0);
+    } else if (orderTypeIndex == 2) {
       getAllOrderHistory('', startDate, endDate, search, 1);
-    } else if(orderTypeIndex == 3){
-      getAllOrderHistory('delivered', startDate, endDate, search,0);
-    }else if(orderTypeIndex == 4){
-      getAllOrderHistory('return', startDate, endDate, search,0);
-    }else if(orderTypeIndex == 5){
-      getAllOrderHistory('canceled', startDate, endDate, search,0);
+    } else if (orderTypeIndex == 3) {
+      getAllOrderHistory('delivered', startDate, endDate, search, 0);
+    } else if (orderTypeIndex == 4) {
+      getAllOrderHistory('return', startDate, endDate, search, 0);
+    } else if (orderTypeIndex == 5) {
+      getAllOrderHistory('canceled', startDate, endDate, search, 0);
     }
     update();
-
   }
 
   DateTime? _startDate;
@@ -265,9 +275,8 @@ class OrderController extends GetxController implements GetxService {
   DateTime? get startDate => _startDate;
   DateFormat get dateFormat => _dateFormat;
 
-  void selectDate(BuildContext context){
+  void selectDate(BuildContext context) {
     showDatePicker(
-
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2022),
@@ -277,5 +286,4 @@ class OrderController extends GetxController implements GetxService {
       update();
     });
   }
-
 }

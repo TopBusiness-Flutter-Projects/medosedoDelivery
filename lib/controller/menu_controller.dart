@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medosedoDelivery/view/screens/chat/conversation_screen.dart';
@@ -7,7 +6,7 @@ import 'package:medosedoDelivery/view/screens/notification/notification_screen.d
 import 'package:medosedoDelivery/view/screens/order_history/order_history_screen.dart';
 import 'package:medosedoDelivery/view/screens/profile/profile_screen.dart';
 
-class BottomMenuController extends GetxController implements GetxService{
+class BottomMenuController extends GetxController implements GetxService {
   int _currentTab = 0;
   int get currentTab => _currentTab;
   late List<Widget> screen;
@@ -17,14 +16,12 @@ class BottomMenuController extends GetxController implements GetxService{
     initPage();
   }
 
-
   selectHomePage({bool first = true}) {
     _currentScreen = screen[0];
     _currentTab = 0;
-    if(first){
+    if (first) {
       update();
     }
-
   }
 
   void initPage() {
@@ -33,7 +30,9 @@ class BottomMenuController extends GetxController implements GetxService{
         _currentTab = index;
         update();
       }),
-      const OrderHistoryScreen(fromMenu: true,),
+      const OrderHistoryScreen(
+        fromMenu: true,
+      ),
       const ConversationScreen(),
       const NotificationScreen(),
       const ProfileScreen(),
@@ -41,11 +40,10 @@ class BottomMenuController extends GetxController implements GetxService{
     _currentScreen = screen[0];
   }
 
-  selectOrderHistoryScreen({bool fromHome =  false}) {
+  selectOrderHistoryScreen({bool fromHome = false}) {
     _currentScreen = const OrderHistoryScreen();
     _currentTab = 1;
     update();
-
   }
 
   selectConversationScreen() {
@@ -59,6 +57,7 @@ class BottomMenuController extends GetxController implements GetxService{
     _currentTab = 3;
     update();
   }
+
   selectProfileScreen() {
     _currentScreen = const ProfileScreen();
     _currentTab = 4;

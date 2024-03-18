@@ -275,7 +275,7 @@
   "verification": "Verification",
   "shipping_address": "Shipping Address",
   "order": "Order",
-  "expected_date": "Expected date",
+  "expected_date": "date",
   "amount_is_greater_than_0": "Amount must be greater than 0",
   "add_a_bank_account": "Add a bank account",
   "additional_delivery_charge_by_admin": "Additional delivery charge by admin",
