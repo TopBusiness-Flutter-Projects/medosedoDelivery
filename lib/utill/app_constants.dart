@@ -5,7 +5,7 @@ class AppConstants {
   static const String companyName = 'medo sedo';
   static const String appName = 'medosedoDelivery';
   static const String polylineMapKey =
-      'AIzaSyCZjDPvxg9h3IUSfVPzIwnKli5Y17p-v9g';
+      'AIzaSyDq0ZFr83uRDmH_kz457gYpk_Y2a200hyg';
   static const String baseUri = 'https://medosedo.com';
   static const String profileUri = '/api/v2/delivery-man/info';
   static const String configUri = '/api/v1/config';

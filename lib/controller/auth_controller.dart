@@ -13,14 +13,12 @@ import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController implements GetxService {
   final AuthRepo authRepo;
-  AuthController({required this.authRepo}) ;
-
+  AuthController({required this.authRepo});
 
   final bool _notification = true;
-  XFile? _pickedFile=XFile('');
+  XFile? _pickedFile = XFile('');
   final String _loginErrorMessage = '';
   String get loginErrorMessage => _loginErrorMessage;
-
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -31,35 +29,35 @@ class AuthController extends GetxController implements GetxService {
   final picker = ImagePicker();
 
   int _selectionTabIndex = 1;
-  int get selectionTabIndex =>_selectionTabIndex;
+  int get selectionTabIndex => _selectionTabIndex;
 
   UserInfoModel? _userInfoModel;
   UserInfoModel? get userInfoModel => _userInfoModel;
 
-
-
-
   void choose() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery, imageQuality: 50, maxHeight: 500, maxWidth: 500);
+    final pickedFile = await picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 50,
+        maxHeight: 500,
+        maxWidth: 500);
     if (pickedFile != null) {
       file = File(pickedFile.path);
     }
     update();
   }
 
-  void setIndexForTabBar(int index, {bool isNotify = true}){
+  void setIndexForTabBar(int index, {bool isNotify = true}) {
     _selectionTabIndex = index;
-    if(isNotify){
+    if (isNotify) {
       update();
     }
-
   }
 
-
-  Future<ResponseModel> login(String countryCode, String phone, String password) async {
+  Future<ResponseModel> login(
+      String countryCode, String phone, String password) async {
     _isLoading = true;
     update();
-    Response response = await authRepo.login(countryCode ,phone, password);
+    Response response = await authRepo.login(countryCode, phone, password);
     ResponseModel responseModel;
     if (response.statusCode == 200) {
       authRepo.saveUserToken(response.body['token']);
@@ -74,24 +72,20 @@ class AuthController extends GetxController implements GetxService {
     return responseModel;
   }
 
-
-
-
   void pickImage() async {
     _pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     update();
   }
 
-
-
-
-  Future<ResponseModel> updateUserInfo(UserInfoModel updateUserModel, String pass) async {
+  Future<ResponseModel> updateUserInfo(
+      UserInfoModel updateUserModel, String pass) async {
     _isLoading = true;
     update();
 
     ResponseModel responseModel;
 
-    http.StreamedResponse response = await authRepo.updateProfile(updateUserModel, pass, file, Get.find<AuthController>().getUserToken());
+    http.StreamedResponse response = await authRepo.updateProfile(
+        updateUserModel, pass, file, Get.find<AuthController>().getUserToken());
     _isLoading = false;
     if (response.statusCode == 200) {
       Get.find<ProfileController>().getProfile();
@@ -101,19 +95,16 @@ class AuthController extends GetxController implements GetxService {
       responseModel = ResponseModel(true, message);
       showCustomSnackBar(message, isError: false);
     } else {
-
-      responseModel = ResponseModel(false, '${response.statusCode} ${response.reasonPhrase}');
+      responseModel = ResponseModel(
+          false, '${response.statusCode} ${response.reasonPhrase}');
     }
     update();
     return responseModel;
   }
 
-
-
   Future<void> updateToken() async {
     await authRepo.updateToken();
   }
-
 
   String _verificationCode = '';
 
@@ -123,7 +114,6 @@ class AuthController extends GetxController implements GetxService {
     _verificationCode = query;
     update();
   }
-
 
   bool _isActiveRememberMe = false;
 
@@ -146,7 +136,6 @@ class AuthController extends GetxController implements GetxService {
     authRepo.saveUserNumberAndPassword(number, password);
   }
 
-
   String getUserEmail() {
     return authRepo.getUserEmail() ?? "";
   }
@@ -159,14 +148,11 @@ class AuthController extends GetxController implements GetxService {
     return authRepo.clearUserNumberAndPassword();
   }
 
-
   String getUserToken() {
     return authRepo.getUserToken();
   }
 
-
   void initData() {
     _pickedFile = null;
   }
-
 }
